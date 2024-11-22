@@ -8,20 +8,23 @@ export default function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        const { email } = user;
-        dispatch(addUser({ email }));
+        const { email,photoURL } = user;
+        dispatch(addUser({ email ,photoURL}));
         navigate("/browse");
       } else {
         dispatch(removeUser());
         navigate("/");
       }
     });
+    return () => unSubscribe();
   }, []);
   return (
     <>
-      <Outlet />
+      <div className="bg-black w-screen h-screen" >
+        <Outlet />
+      </div>
     </>
   );
 }

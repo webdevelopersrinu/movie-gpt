@@ -3,43 +3,49 @@ import { CgProfile } from "react-icons/cg";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { LOGO } from "../utils/constants";
+import { changeSearchState } from "../store/gptSlice";
 
 function Header() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSignIn = useSelector((state) => state.user);
+  const photoURL = useSelector((state) => state.user?.photoURL);
+  const searchGpt = useSelector((state) => state.gpt.searchGpt);
+
   function handeleSingout() {
     signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
         navigate("/error");
       });
   }
   return (
-    <div
-      className="w-full flex items-center justify-between px-5"
-      style={{
-        background:
-          "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(232,75,23,0) 0%, rgba(0,0,0,0.99781162464986) 100%)",
-      }}
-    >
-      <img
-        src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-        alt="logo"
-        className="w-40"
-      />
+    <div className="w-full flex items-center justify-between px-2 sm:px-5 bg-black">
+      <img src={LOGO} alt="logo" className="w-24 sm:w-40" />
       {isSignIn !== null && (
-        <div className="flex items-center justify-between px-5 gap-4">
-          <span className="text-white hover:text-red-700 cursor-pointer">
-            <CgProfile size={30} />
+        <div className="flex items-center justify-between pl-1 sm:px-5  gap-2 sm:gap-4">
+
+          <span
+            onClick={() => dispatch(changeSearchState())}
+            className=" pb-2 text-sm text-nowrap font-bold px-2 sm:px-4 pt-2 rounded-3xl capitalize bg-red-700 text-white cursor-pointer hover:bg-white hover:text-red-700"
+          >
+            {searchGpt ? "Home Page" : "✨Ai Search"}
           </span>
+
           <span
             onClick={handeleSingout}
-            className="pb-2 text-xl font-bold px-4 pt-2 rounded-3xl capitalize bg-red-700 text-white cursor-pointer hover:bg-white hover:text-red-700"
+            className="pb-2 text-sm text-nowrap font-bold  px-2 sm:px-4 pt-2 rounded-3xl capitalize bg-red-700 text-white cursor-pointer hover:bg-white hover:text-red-700"
           >
             sign Out
+          </span>
+          <span className="text-white hover:text-red-700 cursor-pointer ">
+            {photoURL === null ? (
+              <CgProfile size={30} />
+            ) : (
+              <img src={photoURL} alt="profile" className="w-8 rounded-full" />
+            )}
           </span>
         </div>
       )}
