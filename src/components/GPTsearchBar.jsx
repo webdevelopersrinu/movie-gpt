@@ -7,6 +7,7 @@ import {
   addOnSearch,
   removeOnSearch,
 } from "../store/gptSlice";
+import { FaSearch } from "react-icons/fa";
 
 function GPTsearchBar() {
   const aiSearch = React.useRef(null);
@@ -25,18 +26,18 @@ function GPTsearchBar() {
     dispatch(removeOnSearch());
   }
   return (
-    <div className="bg-black  p-4 w-3/5 rounded-xl flex">
+    <div className="bg-black  p-4 w-4/5 sm:w-3/5 rounded-xl flex">
       <input
         type="text"
         ref={aiSearch}
         placeholder="What are you looking for?"
-        className=" px-5 py-2 rounded-lg mr-3 w-4/5"
+        className=" px-5 py-2 rounded-lg mr-3 flex-grow"
       />
       <button
         onClick={(e) => handeleAiSearch(e)}
-        className="pb-2 text-xl font-bold px-4 pt-2 rounded-3xl capitalize bg-red-700  text-white cursor-pointer hover:bg-white hover:text-red-700 w-1/5"
+        className="pb-2  px-2 sm:px-4 pt-2 rounded-3xl  bg-gradient-to-r from-[#FF6F0C] to-[#9C7B13]  text-white cursor-pointer  text-center"
       >
-        Search
+        <FaSearch/>
       </button>
     </div>
   );
