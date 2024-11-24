@@ -31,8 +31,22 @@ export const MOVIE_TRAILER_OPTIONS = (id) => {
     params: { language: "en-US" },
     headers: {
       accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjZGRjMzI1ZjZhNjEzYTUyMjAxNGY2YTExNjY2NTc0MCIsIm5iZiI6MTczMTk0MTY2NS4yNTQ0NTcsInN1YiI6IjY3M2IzNWRhZGM0YmJjMDFjNjkxZTI1NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CPHFq2iZnZeJ4rdjsiseJl3vqaOFBClm4s8eFlpUuFY",
+      Authorization: import.meta.env.VITE_TMDB_TOKEN,
+    },
+  };
+};
+
+export const MOVIE_CREDITS_OPTIONS = (id) => {
+  return {
+    method: "GET",
+    url:
+      "https://thingproxy.freeboard.io/fetch/https://api.themoviedb.org/3/movie/" +
+      id +
+      "/credits",
+    params: { language: "en-US" },
+    headers: {
+      accept: "application/json",
+      Authorization: import.meta.env.VITE_TMDB_TOKEN,
     },
   };
 };

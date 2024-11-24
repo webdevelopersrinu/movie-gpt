@@ -143,7 +143,7 @@ function Login() {
             "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(232,75,23,0) 50%, rgba(0,0,0,0.99781162464986) 100%)",
         }}
       >
-        <Header />
+      
         <div className="bg-black mx-7  sm:w-3/6 lg:w-4/12 text-white sm:mx-auto mt-24 p-5 rounded-lg flex items-start justify-center gap-3 flex-col bg-opacity-70">
           <div className="text-3xl capitalize font-bold py-4">
             {signIn ? "Sign In" : "Sign Up"}

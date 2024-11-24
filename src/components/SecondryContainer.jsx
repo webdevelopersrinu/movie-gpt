@@ -1,10 +1,18 @@
 import React from "react";
 import MovieSection from "./MovieSection";
 import { useSelector } from "react-redux";
+import MovieLoadingSimmer from "./MovieLoadingSimmer";
 
 function SecondryContainer() {
   const moviesList = useSelector((state) => state.movie);
-  if (!moviesList.newPlayingMovies) return;
+  if (!moviesList.newPlayingMovies)
+    return (
+      <>
+        <MovieLoadingSimmer />
+        <MovieLoadingSimmer />
+    
+      </>
+    );
   return (
     <div className="bg-black">
       <MovieSection

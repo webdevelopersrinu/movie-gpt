@@ -8,6 +8,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Browse from "./pages/Browse.jsx";
+import Movie from "./pages/Movie.jsx";
+import ErrorBoundary from "./ErrorBoundary.jsx";
+import GPTsearch from "./pages/GPTsearch.jsx";
 
 const appLayout = createBrowserRouter([
   {
@@ -22,15 +25,25 @@ const appLayout = createBrowserRouter([
         path: "/browse",
         element: <Browse />,
       },
+      {
+        path: "/movies/:id",
+        element: <Movie />,
+      },
+      {
+        path: "/ai-search",
+        element: <GPTsearch />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
   <>
-    <Provider store={appStore}>
-      <RouterProvider router={appLayout} />
-      <ToastContainer />
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={appStore}>
+        <RouterProvider router={appLayout} />
+        <ToastContainer />
+      </Provider>
+    </ErrorBoundary>
   </>
 );

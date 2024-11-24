@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import Header from "../components/Header";
 import PrimaryContainer from "../components/PrimaryContainer";
 import SecondryContainer from "../components/SecondryContainer";
 import useMovies from "../hooks/useMovies";
@@ -20,15 +19,10 @@ function Browse() {
   useMovies("https://api.themoviedb.org/3/movie/upcoming", 1, "upcomingMovies");
   return (
     <div>
-      <Header />
-      {gptSearch ? (
-        <GPTsearch />
-      ) : (
-        <>
-          <PrimaryContainer />
-          <SecondryContainer />
-        </>
-      )}
+      <>
+        <PrimaryContainer />
+        <SecondryContainer />
+      </>
     </div>
   );
 }
